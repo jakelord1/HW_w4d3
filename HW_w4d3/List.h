@@ -24,7 +24,7 @@ public:
     void DelAll();
     void Extract();
 
-    void Add(int n);
+    void Add(T n);
 
 
     void Print();
@@ -66,7 +66,7 @@ List<T>::~List()
     DelAll();
 }
 template <class T>
-void List<T>::Add(int n)
+void List<T>::Add(T n)
 {
     Elem<T>* temp = new Elem<T>;
     temp->next = 0;
@@ -86,14 +86,14 @@ void List<T>::Add(int n)
 template <class T>
 void List<T>::Extract()
 {
-    Elem<T>* Del = Head;
+    Elem<T>* Del = Tail;
+    Elem<T>* PrevDel = Del->prev;
 
-    Elem<T>* AfterDel = Del->next;
+    if (PrevDel != 0 && Count != 1)
+        PrevDel->next = NULL;
 
-    if (AfterDel != 0 && Count != 1)
-        AfterDel->prev = Head;
-        Head = AfterDel;
-    delete Del;
+        Tail = PrevDel;
+        delete Del;
     Count--;
 }
 template <class T>
